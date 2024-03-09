@@ -12,6 +12,10 @@
 - firebase set up
 - deploying to production 
 - Authentication 
+- Redux store to store users on successful sign up 
+- Redux store to remove users on successful sign out 
+- Create Header for Browse Page
+
 
 # Features
 - Login/Sign Up Page

@@ -4,15 +4,21 @@ import { validateFormData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState("");
   const email = useRef(null);
   const password = useRef(null);
-
+  const name = useRef(null);
   const handleForm = () => {
     setIsSignInForm(!isSignInForm);
   };
@@ -37,7 +43,22 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL:
+              "https://media.licdn.com/dms/image/D4D03AQEKV0mimGGPKg/profile-displayphoto-shrink_400_400/0/1671346823742?e=1715212800&v=beta&t=GbdFfnrnjkrc10rxuih28kkdCTcl5XuXX5H6BsxfHZ8",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName, photoURL }));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrMessage(error);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -53,7 +74,8 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          //console.log(user);
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -81,6 +103,7 @@ const Login = () => {
             </p>
             {!isSignInForm && (
               <input
+                ref={name}
                 type="text"
                 placeholder="Full Name"
                 className="w-full p-2 text-black mb-4"
