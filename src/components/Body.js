@@ -16,7 +16,7 @@ const appRouter = createBrowserRouter([
 
 const Body = () => {
   return (
-    <div className="p-0 m-0 box-border">
+    <div className="p-0 m-0 w-screen overflow-x-hidden box-border">
       <RouterProvider router={appRouter} />
     </div>
   );
