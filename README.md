@@ -18,6 +18,7 @@
 -  onAuthStateChanged API helps to prevent the user from getting into browse if succcessful login is not done
 - unsubscribed to onAuthStateChanged callback
 - TMDB as a movie database 
+- Added a button for GPT Search Page
 
 
 # Features

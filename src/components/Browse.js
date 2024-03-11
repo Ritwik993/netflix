@@ -8,21 +8,30 @@ import useTopRated from "../hooks/useTopRated";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import useLatestMovies from "../hooks/useLatestMovies";
 import useTrendingMovies from "../hooks/useTrending";
-
+import GPTSearch from "./GPTSearch";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
-useNowPlayingMovies();
-usePopular();
-useTopRated();
-useUpcomingMovies();
-useLatestMovies();
-useTrendingMovies();
-useTopRated();
+  const gpt = useSelector((store) => store.GPT.gptSearch);
+  useNowPlayingMovies();
+  usePopular();
+  useTopRated();
+  useUpcomingMovies();
+  useLatestMovies();
+  useTrendingMovies();
+  useTopRated();
   return (
     <div className="overflow-x-hidden">
       <Header />
-      <MainContainer/>
-      <SecondaryContainer/>
+      {gpt ? (
+        <GPTSearch />
+      ) : (
+        <>
+          {" "}
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
     </div>
   );
 };

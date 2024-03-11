@@ -7,24 +7,31 @@ import { useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { toggleGPTSearch } from "../utils/gptSlice";
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-  const dispatch=useDispatch();
-  useEffect(()=>{
-    const unsubscribe=onAuthStateChanged(auth, (user) => { //unsubscribe  function is returned by onAuthStateChanged to unsubscribe from it  
+  const dispatch = useDispatch();
+
+  const handleGPTSearch=()=>{
+    dispatch(toggleGPTSearch());
+  }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      //unsubscribe  function is returned by onAuthStateChanged to unsubscribe from it
       if (user) {
         // User is signed in, see docs for a list of available properties
-        const {uid,email,displayName,photoURL} = user;
-        dispatch(addUser({uid,email,displayName,photoURL}));
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(addUser({ uid, email, displayName, photoURL }));
         navigate("/browse");
       } else {
         dispatch(removeUser());
         navigate("/");
       }
     });
-    return ()=>unsubscribe(); 
-  },[])
+    return () => unsubscribe();
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -42,6 +49,12 @@ const Header = () => {
       <img src={Logo} alt="" className="w-44" />
       {user && (
         <div className="flex gap-2">
+          <button
+            className="px-6 py-4 bg-purple-800 text-white rounded"
+            onClick={handleGPTSearch}
+          >
+            GPT Search
+          </button>
           <img src={user?.photoURL} alt="" className="w-12 h-12" />
           <button
             className=" bg-red-700 text-white rounded p-2"
