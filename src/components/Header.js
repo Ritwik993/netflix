@@ -13,9 +13,9 @@ const Header = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  const handleGPTSearch=()=>{
-    dispatch(toggleGPTSearch());
-  }
+  // const handleGPTSearch=()=>{
+  //   dispatch(toggleGPTSearch());
+  // }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -49,12 +49,12 @@ const Header = () => {
       <img src={Logo} alt="" className="w-44" />
       {user && (
         <div className="flex gap-2">
-          <button
+          {/* <button
             className="px-6 py-4 bg-purple-800 text-white rounded"
             onClick={handleGPTSearch}
           >
             GPT Search
-          </button>
+          </button> */}
           <img src={user?.photoURL} alt="" className="w-12 h-12" />
           <button
             className=" bg-red-700 text-white rounded p-2"

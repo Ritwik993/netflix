@@ -9,3 +9,4 @@ body{
 .scrollbar-none::-webkit-scrollbar {
     display: none;
 }
+/* Body.js and body element are not the same thing so donot assume the css u apply on body.js is getting applied to body element */

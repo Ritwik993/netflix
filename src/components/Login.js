@@ -33,7 +33,7 @@ const Login = () => {
     //SignIn or Sign up
 
     if (!isSignInForm) {
-      createUserWithEmailAndPassword(
+       createUserWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
@@ -45,7 +45,7 @@ const Login = () => {
           updateProfile(user, {
             displayName: name.current.value,
             photoURL:
-              "https://media.licdn.com/dms/image/D4D03AQEKV0mimGGPKg/profile-displayphoto-shrink_400_400/0/1671346823742?e=1715212800&v=beta&t=GbdFfnrnjkrc10rxuih28kkdCTcl5XuXX5H6BsxfHZ8",
+              "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg",
           })
             .then(() => {
               // Profile updated!

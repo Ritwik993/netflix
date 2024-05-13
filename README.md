@@ -31,3 +31,4 @@
 - We must keep the App.js clean so create Body.js and write only Body.js inside App.js
 - We donot need App.css any more so move it to trash
 - Write onAuthStateChanged in the Header component as it is present all throughout our app
+- Body.js and body element are not the same thing
